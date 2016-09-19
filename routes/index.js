@@ -4,7 +4,8 @@ var knex = require('knex')(development)
 
 module.exports = {
   get: get,
-  getJson: getJson
+  getJson: getJson,
+  getUser: getUser
 }
 
 function get (req, res) {
@@ -27,4 +28,16 @@ function getJson (req, res) {
     .catch(function (err) {
       res.status(500).send('DATABASE ERROR: ' + err.message)
     })
+}
+
+function getUser (req, res) {
+  knex('users')
+  .select()
+  .where('id', '=', req.params.id)
+  .then(function (user) {
+    res.json({ user: user })
+  })
+  .catch(function (err) {
+    res.status(404).send('DATABASE ERROR: ' + err.message)
+  })
 }

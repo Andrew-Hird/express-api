@@ -16,8 +16,8 @@ app.use(bodyParser.json())
 
 app.get('/', index.get)
 
-// var getUsers = require('./routes/getUsers')
-// app.use('/users', getUsers)
+var getUsers = require('./routes/getUsers')
+app.use('/users', getUsers)
 
 var getUser = require('./routes/getUser')
 app.use('/user', getUser)
@@ -32,7 +32,7 @@ var addUser = require('./routes/addUser')
 app.use('/user', addUser)
 
 var filterUsers = require('./routes/filterUsers')
-app.use('/users', filterUsers)
+app.use('/filterusers', filterUsers)
 
 app.listen(PORT, function () {
   console.log('Listening on port', PORT)

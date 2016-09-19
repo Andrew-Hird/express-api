@@ -6,7 +6,8 @@ module.exports = {
   getUser: getUser,
   deleteUser: deleteUser,
   updateUser: updateUser,
-  addUser: addUser
+  addUser: addUser,
+  filterUsers: filterUsers
 }
 
 function getUsers() {
@@ -41,4 +42,10 @@ function addUser(body) {
       name: body.name,
       email: body.email
     })
+}
+
+function filterUsers(name) {
+  return knex('users')
+  .select()
+  .where('name', '=', name)
 }

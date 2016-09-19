@@ -12,11 +12,13 @@ app.engine('hbs', hbs())
 app.set('view engine', 'hbs')
 app.set('views', path.join(__dirname, 'views'))
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
 
 app.get('/', index.get)
 app.get('/users', index.getJson)
 app.get('/user/:id', index.getUser)
 app.delete('/user/:id', index.deleteUser)
+app.put('/user/:id', index.updateUser)
 
 app.listen(PORT, function () {
   console.log('Listening on port', PORT)

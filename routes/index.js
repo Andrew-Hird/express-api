@@ -8,7 +8,8 @@ module.exports = {
   getJson: getJson,
   getUser: getUser,
   deleteUser: deleteUser,
-  updateUser: updateUser
+  updateUser: updateUser,
+  addUser: addUser
 }
 
 function get (req, res) {
@@ -71,4 +72,18 @@ function updateUser (req, res) {
     res.status(404).send('user update failed')
   })
 
+}
+
+function addUser (req, res) {
+  knex('users')
+  .insert({
+    name: req.body.name,
+    email: req.body.email
+  })
+  .then(function (add) {
+    res.status(201).send('user created')
+  })
+  .catch(function (err) {
+    res.status(404).send('user was not added')
+  })
 }

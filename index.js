@@ -19,6 +19,7 @@ app.get('/users', index.getJson)
 app.get('/user/:id', index.getUser)
 app.delete('/user/:id', index.deleteUser)
 app.put('/user/:id', index.updateUser)
+app.post('/user', index.addUser)
 
 app.listen(PORT, function () {
   console.log('Listening on port', PORT)

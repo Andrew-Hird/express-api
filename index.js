@@ -16,6 +16,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.get('/', index.get)
 app.get('/users', index.getJson)
 app.get('/user/:id', index.getUser)
+app.delete('/user/:id', index.deleteUser)
 
 app.listen(PORT, function () {
   console.log('Listening on port', PORT)

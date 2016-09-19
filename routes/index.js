@@ -5,7 +5,8 @@ var knex = require('knex')(development)
 module.exports = {
   get: get,
   getJson: getJson,
-  getUser: getUser
+  getUser: getUser,
+  deleteUser: deleteUser
 }
 
 function get (req, res) {
@@ -38,6 +39,18 @@ function getUser (req, res) {
     res.json({ user: user })
   })
   .catch(function (err) {
+    res.status(404).send('DATABASE ERROR: ' + err.message)
+  })
+}
+
+function deleteUser (req, res) {
+  knex('users')
+  .del()
+  .where('id', '=', req.params.id)
+  .then(function (deleteCount) {
+    res.status(200).send('user deleted')
+  })
+  .catch(function (err){
     res.status(404).send('DATABASE ERROR: ' + err.message)
   })
 }

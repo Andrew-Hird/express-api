@@ -15,11 +15,21 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
 app.get('/', index.get)
-app.get('/users', index.getJson)
-app.get('/user/:id', index.getUser)
-app.delete('/user/:id', index.deleteUser)
-app.put('/user/:id', index.updateUser)
-app.post('/user', index.addUser)
+
+var getUsers = require('./routes/getUsers')
+app.use('/users', getUsers)
+
+var getUser = require('./routes/getUser')
+app.use('/user', getUser)
+
+var deleteUser = require('./routes/deleteUser')
+app.use('/user', deleteUser)
+
+var updateUser = require('./routes/updateUser')
+app.use('/user', updateUser)
+
+var addUser = require('./routes/addUser')
+app.use('/user', addUser)
 
 app.listen(PORT, function () {
   console.log('Listening on port', PORT)
